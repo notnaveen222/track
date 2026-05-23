@@ -18,7 +18,7 @@ export default function LoginScreen() {
     if (error) {
       Alert.alert("Error", error);
     } else {
-      router.replace("/(app)/home");
+      router.replace("/(onboarding)/onboarding");
     }
   };
 
