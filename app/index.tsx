@@ -41,7 +41,7 @@ export default function Index() {
     return <Redirect href="/(onboarding)/onboarding" />;
 
   if (!profile?.has_completed_workout_setup)
-    return <Redirect href="/(onboarding)/workout-setup" />;
+    return <Redirect href="/(onboarding)/(workout-setup)/workout-setup" />;
 
   return <Redirect href="/(app)/home" />;
 }

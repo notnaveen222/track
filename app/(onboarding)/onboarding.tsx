@@ -50,7 +50,6 @@ export default function Onboarding() {
       .eq("id", session.user.id);
 
     if (error) {
-      // should implement a toast feature that i can use to show err
       console.log(error);
       return;
     }
