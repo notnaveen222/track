@@ -4,15 +4,11 @@ import { supabase } from "@/lib/supabase";
 import { useAuthStore } from "@/store/authStore";
 import { OnboardingFormData } from "@/types/user-onboarding";
 import { router } from "expo-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 
 export default function Onboarding() {
   const session = useAuthStore((s) => s.session);
-  if (!session) {
-    router.replace("/(auth)/login");
-    return;
-  }
   const [currentStep, setCurrentStep] = useState<1 | 2 | 3>(1);
   const [formData, setFormData] = useState<OnboardingFormData>({
     full_name: "",
@@ -25,6 +21,14 @@ export default function Onboarding() {
     full_name: false,
     dob: false,
   });
+  useEffect(() => {
+    if (!session) {
+      router.replace("/(auth)/login");
+    }
+  }, [session]);
+  if (!session) {
+    return null;
+  }
   const handleFormSubmit = async () => {
     const errors = {
       full_name: !formData.full_name.trim(),
@@ -52,6 +56,7 @@ export default function Onboarding() {
     }
     router.replace("/(onboarding)/(workout-setup)/workout-setup");
   };
+
   return (
     <View style={{ flex: 1, justifyContent: "center", padding: 24 }}>
       <Text style={{ fontSize: 28, fontWeight: "bold", marginBottom: 32 }}>
